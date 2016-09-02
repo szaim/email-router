@@ -3,20 +3,23 @@ var ReactDOM = require('react-dom');
 var emailData = require('./email-data');
 var Email = require('./email-component');
 
-// var contacts = Object.keys(props.contacts).map(function(contactId, index) {
-//         var contact = props.contacts[contactId];
-// <Email title="" from="" to="" content=""/>
 
 var Inbox = function(props) {
-  var InboxData = props.data;
+  var InboxData = Object.keys(props.data);
   console.log(InboxData);
-  // var email = props.email.map(function(value, index) {
-  //   return <Email title="" from="" to="" content=""/>
-  // })
+  var emails = InboxData.map(function(emailId, index) {
+  		var email = props.data[emailId];
+    return (
+            <li key={index}> 
+            	<Email id={email.id} title={email.title} from={email.from} to={email.to}
+            	content={email.content} />
+             
+            </li>
+        );
+   })
   return (<div className='inbox'>
-  <h2>Inbox</h2>
-  {InboxData[0].title}
-
+  <h2>Inbox Folder</h2>
+  	{emails}
   </div>)
 }
 
